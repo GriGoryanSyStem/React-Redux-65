@@ -1,27 +1,27 @@
 import React from "react";
 import Us_css from "./Users.module.css";
 import {NavLink} from "react-router-dom";
-import {UserApiContClass} from "../../api/api";
-// import followPict from "../../Pictures/follow_woman.png";
 import followPict from "../../Pictures/unfollow.png";
 
 
 let User = (props) => {
-    // console.log(props);
+    console.log(props);
+    
+
     let pagesCount = Math.ceil(props.store.totalUsersCount / props.store.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-
     return (
         <div>
             <div className={Us_css.pagesNumberDiv}>
                 {pages.map((p, i) => {
                     return (
-                        <div key={i} className={props.store.currentPage === p ? Us_css.selectedPage : ''} onClick={() => {
-                            props.onPageChangeFunc(p)
-                        }}>{`${p} `}</div>) // onClick={ () => {} }
+                        <div key={i} className={props.store.currentPage === p ? Us_css.selectedPage : ''}
+                             onClick={() => {
+                                 props.onPageChangeFunc(p)
+                             }}>{`${p} `}</div>) // onClick={ () => {} }
                 })}
             </div>
             <div className={Us_css.usersNumberDiv}>
@@ -37,27 +37,14 @@ let User = (props) => {
                             </div>
                             <div>
                                 {u.followed
-
-                                    ? <button disabled={props.store.folElemArr.some(elemId => elemId === u.id)} onClick={() => {
-                                        {props.folButDisAC(true, u.id)}
-                                        UserApiContClass.followApi_2(u.id).then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.folAC(u.id);
-                                            }
-                                            {props.folButDisAC(false, u.id)}
-                                        })
-
-                                    }}>Unfollow</button>
-                                    : <button disabled={props.store.folElemArr.some(elemId=>elemId === u.id)} onClick={() => {
-                                        {props.folButDisAC(true, u.id)}
-                                        UserApiContClass.unFollowApi_3(u.id).then(data => {
-                                            if (data.resultCode === 0) {
-                                                props.unFolAC(u.id);
-                                            }
-                                            {props.folButDisAC(false, u.id)}
-                                        });
-
-                                    }}>Follow</button>}
+                                    ? <button disabled={props.store.folElemArr.some(elemId => elemId === u.id)}
+                                              onClick={() => {
+                                                  props.followThunkCreator_S(u.id);
+                                              }}> Unfollow</button>
+                                    : <button disabled={props.store.folElemArr.some(elemId => elemId === u.id)}
+                                              onClick={() => {
+                                                  props.unFollowThunkCreator_S(u.id);
+                                              }}>Follow</button>}
                             </div>
                         </div>
                         <div>
