@@ -11,7 +11,6 @@ let User = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-
     return (
         <div>
             <div className={Us_css.pagesNumberDiv}>
