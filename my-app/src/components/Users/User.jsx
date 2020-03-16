@@ -5,7 +5,6 @@ import followPict from "../../Pictures/unfollow.png";
 
 
 let User = (props) => {
-    debugger
     // console.log(props);
     let pagesCount = Math.ceil(props.store.totalUsersCount / props.store.pageSize);
     let pages = [];
