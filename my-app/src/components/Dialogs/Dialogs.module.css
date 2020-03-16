@@ -1,0 +1,38 @@
+.dialogs {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-content: center;
+}
+.dialogsItems {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+.dialogs .active {
+    color: gold;
+}
+.massages {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    width: 70%;
+}
+.avatarImg {
+    width: 40px;
+    height: 40px;
+}
+.usersPicDiv {
+    display: flex;
+    align-items: center;
+}
+.usersNameDiv {
+    display: flex;
+    align-items: center;
+}
+.usersNameDiv a {
+    text-decoration: none;
+    padding-left: 10px;
+
+}

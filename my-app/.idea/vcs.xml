@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/Components" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/React-Redux-65" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src2/React-Readux-65" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src2/React-Redux-65" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/srcReact50" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/srcReact50/SRC" vcs="Git" />
+  </component>
+</project>
