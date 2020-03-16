@@ -25,7 +25,7 @@ export const UserApiContClass = {
         )
     },
 
-    unfollowApi_3(userId) {
+    unFollowApi_3(userId) {
         return (
             instence.post(`follow/${userId}`).then(response => (response.data))    //promise
         )
