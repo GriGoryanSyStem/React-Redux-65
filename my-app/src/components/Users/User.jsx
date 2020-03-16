@@ -50,7 +50,7 @@ let User = (props) => {
                                     }}>Unfollow</button>
                                     : <button disabled={props.store.folElemArr.some(elemId=>elemId === u.id)} onClick={() => {
                                         {props.folButDisAC(true, u.id)}
-                                        UserApiContClass.unfollowApi_3(u.id).then(data => {
+                                        UserApiContClass.unFollowApi_3(u.id).then(data => {
                                             if (data.resultCode === 0) {
                                                 props.unFolAC(u.id);
                                             }
