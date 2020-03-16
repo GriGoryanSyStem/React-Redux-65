@@ -2,7 +2,8 @@ import React from "react";
 import Us_css from "./Users.module.css";
 import {NavLink} from "react-router-dom";
 import {UserApiContClass} from "../../api/api";
-import followPict from "../../Pictures/follow_woman.png";
+// import followPict from "../../Pictures/follow_woman.png";
+import followPict from "../../Pictures/unfollow.png";
 
 
 let User = (props) => {
