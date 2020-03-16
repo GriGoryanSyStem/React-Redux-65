@@ -21,14 +21,17 @@ export const UserApiContClass = {
 
     followApi_2(userId) {
         return (
-            instence.delete(`follow/${userId}`).then(response => (response.data))    //promise
+            instence.delete(`follow/${userId}`).then(response => {
+                return response.data     //promise
+            })
         )
     },
 
     unFollowApi_3(userId) {
         return (
-            instence.post(`follow/${userId}`).then(response => (response.data))    //promise
+            instence.post(`follow/${userId}`).then(response => {
+                return response.data  //promise
+            })
         )
     }
-
 };

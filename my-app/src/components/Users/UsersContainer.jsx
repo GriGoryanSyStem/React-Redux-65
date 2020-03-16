@@ -1,17 +1,13 @@
 import React from "react";
-import {
-    currentPageAC,
-    followAC,
-    setTotalAC,
-    setUsersAC,
-    toggleIsLoadingAC,
-    unFollowAC,
-    followButtonDisableAC
-} from "../../redux/users-reducer";
-import {connect} from "react-redux";
 import User from "./User";
 import Loader from "../Common/Loader";
-import {UserApiContClass} from "../../api/api"; //63 DAL, axios.create
+import {connect} from "react-redux";
+import {
+    followThunkAC,
+    unFollowThunkAC,
+    getUsersThunkCreator, followThunkCreator, unFollowThunkCreator
+} from "../../redux/users-reducer";
+
 
 class UsersContainer extends React.Component {
     constructor(props) {
@@ -19,23 +15,11 @@ class UsersContainer extends React.Component {
     }
 
     componentDidMount() {
-
-        UserApiContClass.getUsersApi(this.props.currentPage, this.props.pageSize).then(data => {   //52
-            // console.log(response.data.items);
-            this.props.setUs(data.items);
-            this.props.setTotalUsersCount(data.totalCount);
-        });
+        this.props.getUsersThunkCreator_S(this.props.currentPage, this.props.pageSize); //66
     }
 
     onPageChangeFunc = (p) => {
-        this.props.toggleLoad(true);
-        this.props.currentPageFunc(p);
-
-        UserApiContClass.getUsersApi(p, this.props.pageSize).then(data => {
-            // console.log(response.data.items);
-            this.props.setUs(data.items);
-            this.props.toggleLoad(false);
-        });
+        this.props.getUsersThunkCreator_S(p, this.props.pageSize);
     };
 
     render() {
@@ -56,18 +40,12 @@ const mapStateToProps = (state) => {
     }
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {}
-// };
-
 const UserContainerConnect = connect(mapStateToProps, {
-    folAC: followAC,
-    unFolAC: unFollowAC,
-    setUs: setUsersAC,
-    currentPageFunc: currentPageAC,
-    setTotalUsersCount: setTotalAC,
-    toggleLoad: toggleIsLoadingAC,
-    folButDisAC: followButtonDisableAC
+    folAC: followThunkAC,
+    unFolAC: unFollowThunkAC,
+    getUsersThunkCreator_S: getUsersThunkCreator,
+    followThunkCreator_S: followThunkCreator,
+    unFollowThunkCreator_S: unFollowThunkCreator
 })(UsersContainer);
 
 export default UserContainerConnect;
