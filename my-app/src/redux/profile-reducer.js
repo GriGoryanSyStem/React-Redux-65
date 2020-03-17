@@ -1,3 +1,5 @@
+import {UsersAPI} from "../api/api";
+
 let initialState = {
     postsData: [
         {
@@ -33,6 +35,13 @@ export const updateNewPostTextActionCreator = (param) => {
 export const setApiDataAC = (profileId) => {
     return {type: 'SET-API-DATA', profileId}
 };
+export const profileThunk = (userId)=>{
+    return(dispatch)=>{
+        UsersAPI.getProfileApi(userId).then(response => {
+            dispatch(setApiDataAC(response.data));
+        });
+    }
+}
 
 
 const profileReducer = (state = initialState, action) => {

@@ -6,7 +6,8 @@ import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        storeGetState:state
+        storeGetState:state,
+        isAuthLogin: state.auth.isAuth//68 Redirect
     }
 };
 let mapDispatchToProps = (dispatch) => {

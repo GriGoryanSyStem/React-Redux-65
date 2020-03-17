@@ -2,9 +2,10 @@ import React from "react";
 import aa from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Massages from "./Massage/Massages";
+import {Redirect} from "react-router-dom";
 
 const Dialogs = (props) => {
-    console.log(props);
+    // console.log(props);
     let storeGetState = props.storeGetState.dialogsPage;
     let DialogsItemElem = storeGetState.dialogsData.map((i, k) => <DialogItem key={k} name={i.name} id={i.id} avatarSrc={i.avatarSrc}/>);
     let MessageElem = storeGetState.messagesData.map((i, k) => <Massages key={k} text={i.massage} id={i.id}/>);
@@ -16,6 +17,10 @@ const Dialogs = (props) => {
     let onChangeMassage = (e) => {
         props.updateNewMassageBodyCreator(e.target.value);
     };
+
+       if(props.isAuthLogin === false){
+           return <Redirect to ={'/login'}/>
+       }
 
     return (
         <div>

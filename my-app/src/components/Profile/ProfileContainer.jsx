@@ -1,40 +1,33 @@
 import React from "react";
-import * as axios from "axios";
 import {connect} from "react-redux";
-import {setApiDataAC} from "../../redux/profile-reducer";
-import {withRouter} from "react-router-dom";
+import {profileThunk} from "../../redux/profile-reducer";
+import {Redirect, withRouter} from "react-router-dom";
 import Profile from "./Profile";
-import {UsersAPI} from "../../api/api";
 
-class  ProfileContainer extends React.Component {
-
+class ProfileContainer extends React.Component {
     componentDidMount() {
-        if (!this.props.match.params.userId){
+        if (!this.props.match.params.userId) {
             this.props.match.params.userId = 6244
         }
-        UsersAPI.getProfileApi(this.props.match.params.userId).then(response => {
-            this.props.setApiDataAC(response.data);
-            // console.log(response);
-        });
+        this.props.profileThunk(this.props.match.params.userId);
     }
-
     render() {
-        return (
-            <div>
-                <Profile {...this.props}/>
-            </div>
-        )
+        if (this.props.isAuthLogin === false) {
+            return <Redirect to={'/login'}/>
+        } else {
+            return <Profile {...this.props}/>
+        }
     }
 }
-
 let mapStateToProps = (state) => {
     return {
-          store : state.profilePage,
+        store: state.profilePage,
+        isAuthLogin: state.auth.isAuth,
     }
 };
 
-let ProfileContURL =  withRouter(ProfileContainer);
+let ProfileContURL = withRouter(ProfileContainer);
 
-export default connect (mapStateToProps,{
-    setApiDataAC,
+export default connect(mapStateToProps, {
+    profileThunk,
 })(ProfileContURL);

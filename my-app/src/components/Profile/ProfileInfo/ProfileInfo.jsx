@@ -1,13 +1,13 @@
 import React from "react";
 import aa from './ProfileInfo.module.css'
 import Loader from "../../Common/Loader";
+import {Redirect} from "react-router-dom";
 
 
 const ProfileInfo = (props) => {
     if(!props.profileId){
         return <Loader/>;
     }
-    // console.log(props.profileId);
     return (
         <div>
             <div className={aa.flowerGirl}>

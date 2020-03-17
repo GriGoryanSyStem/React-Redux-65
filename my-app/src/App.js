@@ -9,6 +9,8 @@ import FriendsContainer from "./components/Friends/FriendsContainer";
 import UserContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Header from "./components/Header/Header";
+import Login from "./components/Login/Login";
 
 const App = () => {
     return (
@@ -23,6 +25,7 @@ const App = () => {
                 <Route path="/news" component={News}/>
                 <Route path="/setting" component={Settings}/>
                 <Route path={"/friends"} render={() => <FriendsContainer/>}/>
+                <Route path={"/login"} render={() => <Login/>}/>
             </div>
         </div>
     )
