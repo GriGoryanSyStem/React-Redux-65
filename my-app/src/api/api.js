@@ -38,7 +38,6 @@ export const authAPI = {
     authMe(){
        return (
            instence.get(`auth/me`)
-        console.log('')
        )
     }
 };
