@@ -2,11 +2,7 @@ import React from "react";
 import User from "./User";
 import Loader from "../Common/Loader";
 import {connect} from "react-redux";
-import {
-    followThunkAC,
-    unFollowThunkAC,
-    getUsersThunkCreator, followThunkCreator, unFollowThunkCreator
-} from "../../redux/users-reducer";
+import {followThunk, getUsersThunkCreator, unFollowThunk,} from "../../redux/users-reducer";
 
 
 class UsersContainer extends React.Component {
@@ -41,11 +37,9 @@ const mapStateToProps = (state) => {
 };
 
 const UserContainerConnect = connect(mapStateToProps, {
-    folAC: followThunkAC,
-    unFolAC: unFollowThunkAC,
     getUsersThunkCreator_S: getUsersThunkCreator,
-    followThunkCreator_S: followThunkCreator,
-    unFollowThunkCreator_S: unFollowThunkCreator
+    followThunkCreator_S: followThunk,
+    unFollowThunkCreator_S: unFollowThunk
 })(UsersContainer);
 
 export default UserContainerConnect;

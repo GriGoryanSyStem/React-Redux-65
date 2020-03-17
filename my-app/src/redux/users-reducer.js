@@ -1,4 +1,5 @@
-import {UserApiContClass} from "../api/api";
+import {UsersAPI} from "../api/api";
+
 
 let initialState = {
     users: [],
@@ -11,8 +12,8 @@ let initialState = {
 
 // console.log(initialState.users);
 
-export const followThunkAC = (userId) => ({type: 'FOLLOW', userId});
-export const unFollowThunkAC = (userId) => ({type: 'UN_FOLLOW', userId});
+export const followAC = (userId) => ({type: 'FOLLOW', userId});
+export const unFollowAC = (userId) => ({type: 'UN_FOLLOW', userId});
 export const setUsersAC = (users) => ({type: 'SET_USERS', users});
 export const currentPageAC = (pageNumber) => ({type: 'CURRENT_PAGE', pageNumber});
 export const setTotalAC = (TC) => ({type: 'TOTAL_USERS_COUNT', TC});
@@ -20,10 +21,10 @@ export const toggleIsLoadingAC = (bool) => ({type: "TOGGLE_IS_LOADING", bool});
 export const followButtonDisableAC = (isFetching, userId) => ({type: "BUTTON_DISABLE", isFetching, userId});
 
 
-export const getUsersThunkCreator = (currentPage = 1,pageSize) => {
+export const getUsersThunkCreator = (currentPage = 1, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsLoadingAC(true));
-        UserApiContClass.getUsersApi(currentPage, pageSize).then(data => {   //52
+        UsersAPI.getUsersApi(currentPage, pageSize).then(data => {   //52
             dispatch(currentPageAC(currentPage));
             dispatch(toggleIsLoadingAC(false));
             dispatch(setUsersAC(data.items));
@@ -32,25 +33,26 @@ export const getUsersThunkCreator = (currentPage = 1,pageSize) => {
     }
 };
 
-export const followThunkCreator = (userId) => {
+
+export const followThunk = (userId) => {
     return (dispatch) => {
-        dispatch(followButtonDisableAC(true,userId));
-        UserApiContClass.followApi_2(userId).then(data => {   //52
-            if(data.resultCode == 0){
-                dispatch(followThunkAC(userId));
+        dispatch(followButtonDisableAC(true, userId));
+        UsersAPI.followApi(userId).then(response => {
+            if (response.data.resultCode == 0) {
+                dispatch(unFollowAC(userId));
             }
-            dispatch(followButtonDisableAC(false,userId));
+            dispatch(followButtonDisableAC(false, userId));
         });
     }
 };
-export const unFollowThunkCreator = (userId) => {
+export const unFollowThunk = (userId) => {
     return (dispatch) => {
-        dispatch(followButtonDisableAC(true,userId));
-        UserApiContClass.unFollowApi_3(userId).then(data => {   //52
-            if(data.resultCode == 0){
-                dispatch(unFollowThunkAC(userId));
+        dispatch(followButtonDisableAC(true, userId));
+        UsersAPI.unFollowApi(userId).then(response => {
+            if (response.data.resultCode == 0) {
+                dispatch(followAC(userId));
             }
-            dispatch(followButtonDisableAC(false,userId));
+            dispatch(followButtonDisableAC(false, userId));
         });
     }
 };

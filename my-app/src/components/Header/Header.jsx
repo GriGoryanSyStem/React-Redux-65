@@ -9,7 +9,7 @@ return(
             <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" alt="image"/>
 
             <div className={cc.login_block}>
-                {props.isAuth ? props.login : <NavLink to = {'/login'}>Login el</NavLink>}
+                {props.isAuth ? props.login : <NavLink to = {'/login'}>Login</NavLink>}
 
             </div>
 

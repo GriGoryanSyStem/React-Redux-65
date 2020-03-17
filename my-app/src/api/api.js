@@ -9,8 +9,7 @@ const instence = axios.create({
     }
 });
 
-export const UserApiContClass = {
-
+export const UsersAPI = {
     getUsersApi(currentPage = 1, pageSize = 50) { //63 DAL, axios.create  default znachenie currentPage = 1, pageSize = 50
         return (
             instence.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
@@ -18,20 +17,27 @@ export const UserApiContClass = {
             })
         )
     },
-
-    followApi_2(userId) {
+    followApi(userId) {
         return (
-            instence.delete(`follow/${userId}`).then(response => {
-                return response.data     //promise
-            })
+            instence.post(`follow/${userId}`)
         )
     },
-
-    unFollowApi_3(userId) {
+    unFollowApi(userId) {
         return (
-            instence.post(`follow/${userId}`).then(response => {
-                return response.data  //promise
-            })
+            instence.delete(`follow/${userId}`)
         )
+    },
+    getProfileApi(userId){
+        return (
+            instence.get(`profile/${userId}`)
+        )
+    }
+};
+
+export const authAPI = {
+    authMe(){
+       return (
+           instence.get(`auth/me`)
+       )
     }
 };

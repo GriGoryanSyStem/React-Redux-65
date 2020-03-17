@@ -6,8 +6,6 @@ import followPict from "../../Pictures/unfollow.png";
 
 let User = (props) => {
     console.log(props);
-    
-
     let pagesCount = Math.ceil(props.store.totalUsersCount / props.store.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -39,11 +37,11 @@ let User = (props) => {
                                 {u.followed
                                     ? <button disabled={props.store.folElemArr.some(elemId => elemId === u.id)}
                                               onClick={() => {
-                                                  props.followThunkCreator_S(u.id);
+                                                  props.unFollowThunkCreator_S(u.id);
                                               }}> Unfollow</button>
                                     : <button disabled={props.store.folElemArr.some(elemId => elemId === u.id)}
                                               onClick={() => {
-                                                  props.unFollowThunkCreator_S(u.id);
+                                                  props.followThunkCreator_S(u.id);
                                               }}>Follow</button>}
                             </div>
                         </div>
