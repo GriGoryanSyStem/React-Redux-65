@@ -28,8 +28,16 @@ class ProfileStatus extends React.Component {
             status: e.currentTarget.value
         })
     };
+ componentDidUpdate(prevProps, prevState, snapshot) {
+     if(prevProps.status !== this.props.status){
+         this.setState({
+             status:this.props.status
+         });
+     }
+ }
 
     render() {
+        console.log('render')
         return (
             <div className={aa.statusContainerDiv}>
                 {!this.state.editMode &&
