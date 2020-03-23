@@ -2,8 +2,8 @@ import React from "react";
 import {sendMassageCreator, updateNewMassageBodyCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
-import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 let mapStateToProps = (state) => {
@@ -13,7 +13,8 @@ let mapStateToProps = (state) => {
     }
 };
 
-let AuthRedirectComponent = withAuthRedirect(Dialogs);
+
+
 
 let mapDispatchToProps = (dispatch) => {
     return {
@@ -25,6 +26,8 @@ let mapDispatchToProps = (dispatch) => {
         }
     }
 };
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);   // 45 - React
 
-export default DialogsContainer;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);

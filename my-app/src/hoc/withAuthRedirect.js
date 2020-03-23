@@ -11,4 +11,4 @@ export const withAuthRedirect = (Component) =>{
         }
     }
     return RedirectComponent;
-}
+};
