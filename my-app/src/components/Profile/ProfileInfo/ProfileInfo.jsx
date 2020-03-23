@@ -1,7 +1,7 @@
 import React from "react";
 import aa from './ProfileInfo.module.css'
 import Loader from "../../Common/Loader";
-import {Redirect} from "react-router-dom";
+import ProfileStatus from "./ProfileStatus";
 
 
 const ProfileInfo = (props) => {
@@ -16,6 +16,9 @@ const ProfileInfo = (props) => {
                     alt="pic"/>
             </div>
             <div>{props.profileId.fullName}</div>
+
+            <ProfileStatus status = {'Heelooo'}/>
+
             <div className={aa.desctiptionBlock}>
 
             </div>
