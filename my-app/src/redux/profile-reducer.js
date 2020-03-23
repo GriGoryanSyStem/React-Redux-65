@@ -1,4 +1,4 @@
-import {UsersAPI} from "../api/api";
+import {ProfileAPI, UsersAPI} from "../api/api";
 
 let initialState = {
     postsData: [
@@ -23,25 +23,33 @@ let initialState = {
     ],
     newPostText: 'it-kamasutra.com text',
     profileId: null,
+    status:""
 };
 
 
-export const addPostActionCreator = () => {  //39 - Уроки
-    return {type: 'ADD-POST',}
-};
-export const updateNewPostTextActionCreator = (param) => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: param}
-};
-export const setApiDataAC = (profileId) => {
-    return {type: 'SET-API-DATA', profileId}
-};
 export const profileThunk = (userId)=>{
     return(dispatch)=>{
         UsersAPI.getProfileApi(userId).then(response => {
             dispatch(setApiDataAC(response.data));
         });
     }
-}
+};
+export const statusThunk = (userId)=>{
+    return(dispatch)=>{
+        ProfileAPI.getStatusApi(userId).then(response => {
+            dispatch(setStatusAC(response.data));
+        });
+    }
+};
+export const updateStatusThunk = (status)=>{
+    return(dispatch)=>{
+        ProfileAPI.UpdateStatusApi(status).then(response => {
+            if (response.data.resultCode === 0){
+                dispatch(setStatusAC(status));
+            }
+        });
+    }
+};
 
 
 const profileReducer = (state = initialState, action) => {
@@ -68,10 +76,31 @@ const profileReducer = (state = initialState, action) => {
             profileId:action.profileId,
         }
     }
+    else if(action.type === 'SET-STATUS'){
+        return{
+            ...state,
+            status:action.status,
+        }
+    }
     else {
         return state;
     }
 };
+
+
+export const addPostActionCreator = () => {  //39 - Уроки
+    return {type: 'ADD-POST',}
+};
+export const updateNewPostTextActionCreator = (param) => {
+    return {type: 'UPDATE-NEW-POST-TEXT', newText: param}
+};
+export const setApiDataAC = (profileId) => {
+    return {type: 'SET-API-DATA', profileId}
+};
+export const setStatusAC = (status) => {
+    return {type: 'SET-STATUS', status}
+};
+
 
 
 export default profileReducer;  //41 - React

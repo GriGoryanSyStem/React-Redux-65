@@ -5,19 +5,19 @@ import ProfileStatus from "./ProfileStatus";
 
 
 const ProfileInfo = (props) => {
-    if(!props.profileId){
+    if(!props.store.profileId){
         return <Loader/>;
     }
     return (
         <div>
             <div className={aa.flowerGirl}>
                 <img
-                    src={props.profileId.photos.large}
+                    src={props.store.profileId.photos.large}
                     alt="pic"/>
             </div>
-            <div>{props.profileId.fullName}</div>
+            <div>{props.store.profileId.fullName}</div>
 
-            <ProfileStatus status = {'Heelooo'}/>
+            <ProfileStatus status = {props.store.status} updateStatusThunk = {props.updateStatusThunk}/>
 
             <div className={aa.desctiptionBlock}>
 

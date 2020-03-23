@@ -28,8 +28,27 @@ export const UsersAPI = {
         )
     },
     getProfileApi(userId){
+        console.warn('poxeq ProfileApi object in api.js')
+        return (
+            ProfileAPI.getProfileApi(userId)
+        )
+    }
+};
+
+export const ProfileAPI = {
+    getProfileApi(userId){
         return (
             instence.get(`profile/${userId}`)
+        )
+    },
+    getStatusApi(userId){
+        return (
+            instence.get(`profile/status/${userId}`)
+        )
+    },
+    UpdateStatusApi(status){
+        return (
+            instence.put(`profile/status`,{status:status})
         )
     }
 };
