@@ -36,26 +36,16 @@ let initialState = {
         {id: 2, massage: 'How is your ID'},
         {id: 3, massage: 'YOyo'}
     ],
-    newMessageText: ''
 };
 
-export const sendMassageCreator = () => {
-    return {type: 'SEND_MASSAGE'}
-};
-export const updateNewMassageBodyCreator = (e_Target_Value_Text) => {
-    return {type: 'UPDATE_NEW_MASSAGE_BODY', smallBodyText: e_Target_Value_Text}
+export const sendMassageCreator = (newMassageBody) => {
+    return {type: 'SEND_MASSAGE', newMassageBody}
 };
 
 const dialogsReducer = (state = initialState, action) => {
-
-    if (action.type === 'UPDATE_NEW_MASSAGE_BODY') {
-        let stateCopy = {...state};
-        stateCopy.newMessageText = action.smallBodyText;
-        return stateCopy;
-    } else if (action.type === 'SEND_MASSAGE') {
+    if (action.type === 'SEND_MASSAGE') {
         let stateCopy_2 = {...state};
-        stateCopy_2.messagesData.push({id: 4, massage: stateCopy_2.newMessageText});
-        stateCopy_2.newMessageText = '';
+        stateCopy_2.messagesData.push({id: 4, massage: action.newMassageBody});
         return stateCopy_2;
     } else {
         return state;

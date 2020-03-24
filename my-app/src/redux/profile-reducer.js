@@ -21,30 +21,29 @@ let initialState = {
             faceSrc: 'https://img4.goodfon.ru/wallpaper/nbig/2/b9/deekshitha-bollywood-actress-celebrity-model-girl-beautiful.jpg'
         }
     ],
-    newPostText: 'it-kamasutra.com text',
     profileId: null,
-    status:""
+    status: ""
 };
 
 
-export const profileThunk = (userId)=>{
-    return(dispatch)=>{
+export const profileThunk = (userId) => {
+    return (dispatch) => {
         UsersAPI.getProfileApi(userId).then(response => {
             dispatch(setApiDataAC(response.data));
         });
     }
 };
-export const statusThunk = (userId)=>{
-    return(dispatch)=>{
+export const statusThunk = (userId) => {
+    return (dispatch) => {
         ProfileAPI.getStatusApi(userId).then(response => {
             dispatch(setStatusAC(response.data));
         });
     }
 };
-export const updateStatusThunk = (status)=>{
-    return(dispatch)=>{
+export const updateStatusThunk = (status) => {
+    return (dispatch) => {
         ProfileAPI.UpdateStatusApi(status).then(response => {
-            if (response.data.resultCode === 0){
+            if (response.data.resultCode === 0) {
                 dispatch(setStatusAC(status));
             }
         });
@@ -53,46 +52,36 @@ export const updateStatusThunk = (status)=>{
 
 
 const profileReducer = (state = initialState, action) => {
-    if (action.type === 'UPDATE-NEW-POST-TEXT') {
-        let stateCopy = {...state};
-        stateCopy.newPostText = action.newText;
-        return stateCopy;
-    } else if (action.type === 'ADD-POST') {
+    if (action.type === 'ADD-POST') {
         let newPost = {
             id: 5,
-            massage: state.newPostText,
+            massage: action.val,
             likesCount: 2020,
             faceSrc: 'https://c.stocksy.com/a/LXL500/z9/1274431.jpg?1578827516'
         };
-        let stateCopytwo = {...state};
-        stateCopytwo.postsData = [...state.postsData];
-        stateCopytwo.postsData.push(newPost);
-        stateCopytwo.newPostText = '';
-        return stateCopytwo;
-    }
-    else if(action.type === 'SET-API-DATA'){
-        return{
+        let Copy = {...state};
+        Copy.postsData = [...state.postsData];
+        Copy.postsData.push(newPost);
+        return Copy;
+
+    } else if (action.type === 'SET-API-DATA') {
+        return {
             ...state,
-            profileId:action.profileId,
+            profileId: action.profileId,
         }
-    }
-    else if(action.type === 'SET-STATUS'){
-        return{
+    } else if (action.type === 'SET-STATUS') {
+        return {
             ...state,
-            status:action.status,
+            status: action.status,
         }
-    }
-    else {
+    } else {
         return state;
     }
 };
 
 
-export const addPostActionCreator = () => {  //39 - Уроки
-    return {type: 'ADD-POST',}
-};
-export const updateNewPostTextActionCreator = (param) => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: param}
+export const addPostActionCreator = (val) => {  //39 - Уроки
+    return {type: 'ADD-POST', val}
 };
 export const setApiDataAC = (profileId) => {
     return {type: 'SET-API-DATA', profileId}
@@ -100,7 +89,6 @@ export const setApiDataAC = (profileId) => {
 export const setStatusAC = (status) => {
     return {type: 'SET-STATUS', status}
 };
-
 
 
 export default profileReducer;  //41 - React

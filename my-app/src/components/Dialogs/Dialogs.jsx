@@ -3,24 +3,23 @@ import aa from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Massages from "./Massage/Massages";
 import {Redirect} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
 
 const Dialogs = (props) => {
-    // console.log(props);
     let storeGetState = props.storeGetState.dialogsPage;
-    let DialogsItemElem = storeGetState.dialogsData.map((i, k) => <DialogItem key={k} name={i.name} id={i.id} avatarSrc={i.avatarSrc}/>);
+    let DialogsItemElem = storeGetState.dialogsData.map((i, k) => <DialogItem key={k} name={i.name} id={i.id}
+                                                                              avatarSrc={i.avatarSrc}/>);
     let MessageElem = storeGetState.messagesData.map((i, k) => <Massages key={k} text={i.massage} id={i.id}/>);
-    let newMassageBody = storeGetState.newMessageText;
 
-    let onClickMassage = () => {
-        props.onClickMassage();  //40 - React
+    let onClickMassage = (newMassageBody) => {
+        props.onClickMassage(newMassageBody);  //40 - React
     };
-    let onChangeMassage = (e) => {
-        props.updateNewMassageBodyCreator(e.target.value);
+    if (props.isAuthLogin === false) {
+        return <Redirect to={'/login'}/>
+    }
+    let addNewMassage =(valueForm)=>{
+        onClickMassage(valueForm.newMassageBody)
     };
-
-       if(props.isAuthLogin === false){
-           return <Redirect to ={'/login'}/>
-       }
 
     return (
         <div>
@@ -30,19 +29,26 @@ const Dialogs = (props) => {
                 </div>
                 <div className={aa.massages}>
                     <div>{MessageElem}</div>
-                    <div>
-                        <div>
-                            <textarea placeholder={'enter your massage'} cols="30" rows="10" value={newMassageBody}
-                                      onChange={onChangeMassage}/>
-                        </div>
-                        <div>
-                            <button onClick={onClickMassage}>Send</button>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <AddMassageFormRedux onSubmit ={addNewMassage}/>
         </div>
     )
 };
+
+const AddMassageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component ='textarea' name = "newMassageBody" placeholder='enter your massage'/>
+               </div>
+            <div>
+                <button>Send</button>
+            </div>
+        </form>
+    )
+};
+
+const AddMassageFormRedux = reduxForm({form: 'dialogAddMassageForm'})(AddMassageForm);
 
 export default Dialogs;
