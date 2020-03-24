@@ -55,7 +55,7 @@ const profileReducer = (state = initialState, action) => {
     if (action.type === 'ADD-POST') {
         let newPost = {
             id: 5,
-            massage: action.val,
+            massage: action.value,
             likesCount: 2020,
             faceSrc: 'https://c.stocksy.com/a/LXL500/z9/1274431.jpg?1578827516'
         };
@@ -80,8 +80,8 @@ const profileReducer = (state = initialState, action) => {
 };
 
 
-export const addPostActionCreator = (val) => {  //39 - Уроки
-    return {type: 'ADD-POST', val}
+export const addPostActionCreator = (value) => {  //39 - Уроки
+    return {type: 'ADD-POST', value}
 };
 export const setApiDataAC = (profileId) => {
     return {type: 'SET-API-DATA', profileId}
