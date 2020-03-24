@@ -4,13 +4,13 @@ import DialogItem from "./DialogItem/DialogItem";
 import Massages from "./Massage/Massages";
 import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
-import {Textarea} from "../Common/FormsControl/FormsControl";
 import {maxLength, minLength, required} from "../../utilValidation/validators/validator";
+import {Element} from "../Common/FormsControl/FormsControl";
+
 
 const Dialogs = (props) => {
     let storeGetState = props.storeGetState.dialogsPage;
-    let DialogsItemElem = storeGetState.dialogsData.map((i, k) => <DialogItem key={k} name={i.name} id={i.id}
-                                                                              avatarSrc={i.avatarSrc}/>);
+    let DialogsItemElem = storeGetState.dialogsData.map((i, k) => <DialogItem key={k} name={i.name} id={i.id} avatarSrc={i.avatarSrc}/>);
     let MessageElem = storeGetState.messagesData.map((i, k) => <Massages key={k} text={i.massage} id={i.id}/>);
 
     let onClickMassage = (newMassageBody) => {
@@ -40,12 +40,13 @@ const Dialogs = (props) => {
 
 let maxLength30 = maxLength(30);
 let minLength1 = minLength(1);
+const InputType = Element('textarea');
 
 const AddMassageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field  component ={Textarea}
+                <Field  component ={InputType}
                         name = "newMassageBody"
                         placeholder='enter your massage'
                         validate={[required, maxLength30, minLength1]}/>
