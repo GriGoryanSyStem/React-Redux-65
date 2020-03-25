@@ -5,6 +5,7 @@ import ProfileStatus from "./ProfileStatus";
 
 
 const ProfileInfo = (props) => {
+
     if(!props.store.profileId){
         return <Loader/>;
     }
@@ -13,7 +14,7 @@ const ProfileInfo = (props) => {
             <div className={aa.flowerGirl}>
                 <img
                     src={props.store.profileId.photos.large}
-                    alt="pic"/>
+                    alt="my profile image"/>
             </div>
             <div>{props.store.profileId.fullName}</div>
 

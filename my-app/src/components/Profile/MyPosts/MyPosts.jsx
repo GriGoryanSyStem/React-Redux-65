@@ -3,11 +3,10 @@ import dd from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
 import {required, maxLength, minLength} from "../../../utilValidation/validators/validator";
-import {Element} from "../../Common/FormsControl/FormsControl";
+import {renderField} from "../../Common/FormsControl/FormsControl";
 
 let maxLength15 = maxLength(15);
 let minLength2 = minLength(2);
-const InputType = Element('textarea');
 
 const MyPosts = (props) => {
     let newArrPostsData = props.store.profilePage.postsData.map((index, key) => {
@@ -32,7 +31,9 @@ const addNewPostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={InputType} name="TextValue" placeholder=' Write Post Massage'
+                <Field component={renderField}
+                       name="TextValue"
+                       label=' Write Post Massage'
                        validate={[required, maxLength15, minLength2]}/>
             </div>
             <div>

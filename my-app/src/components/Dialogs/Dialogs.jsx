@@ -2,10 +2,10 @@ import React from "react";
 import aa from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Massages from "./Massage/Massages";
-import {Redirect} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, minLength, required} from "../../utilValidation/validators/validator";
-import {Element} from "../Common/FormsControl/FormsControl";
+import {renderField} from "../Common/FormsControl/FormsControl";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 const Dialogs = (props) => {
@@ -40,15 +40,14 @@ const Dialogs = (props) => {
 
 let maxLength30 = maxLength(30);
 let minLength1 = minLength(1);
-const InputType = Element('textarea');
 
 const AddMassageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field  component ={InputType}
+                <Field  component ={renderField}
                         name = "newMassageBody"
-                        placeholder='enter your massage'
+                        label='enter your massage'
                         validate={[required, maxLength30, minLength1]}/>
                </div>
             <div>

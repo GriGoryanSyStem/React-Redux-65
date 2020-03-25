@@ -7,29 +7,45 @@ let initialState = {
     isAuth:false
 };
 
-export const setUserData = (id,email,login) => ( {type:'SET_USER_DATA', data:{id,email,login} });
+const authReducer = (state = initialState, action) => {
+    if (action.type === 'SET_USER_DATA') {
+        return {
+            ...state,
+            ...action.payload,
+        };
+    } else {
+        return state;
+    }
+};
+
+export const setUserData = (id,email,login,isAuth) => (
+    {type:'SET_USER_DATA', payload:{id,email,login,isAuth} }
+    );
 
 export const authThunk = () => {
     return (dispatch) => {
         authAPI.authMe().then(response=>{
         if(response.data.resultCode === 0){
             let {id,email,login} = response.data.data;
-            dispatch(setUserData(id,email,login));
+            dispatch(setUserData(id,email,login,true));
         }
     })}
 };
-
-
-const authReducer = (state = initialState, action) => {
-    if (action.type === 'SET_USER_DATA') {
-        return {
-            ...state,
-            ...action.data,
-            isAuth: true
-        };
-    } else {
-        return state;
-    }
+export const loginThunk = (email,password,rememberMe) => {
+    return (dispatch) => {
+        authAPI.loginApi(email,password,rememberMe).then(response=>{
+        if(response.data.resultCode === 0){
+            dispatch(authThunk());
+        }
+    })}
+};
+export const logOutThunk = () => {
+    return (dispatch) => {
+          authAPI.logOutApi().then(response=>{
+        if(response.data.resultCode === 0){
+            dispatch(setUserData(null,null,null,false));
+        }
+    })}
 };
 
 export default authReducer;

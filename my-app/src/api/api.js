@@ -58,5 +58,15 @@ export const authAPI = {
        return (
            instence.get(`auth/me`)
        )
+    },
+    loginApi(email,password,rememberMe = false){ //78
+       return (
+           instence.post(`auth/login`,{email,password,rememberMe})
+       )
+    },
+    logOutApi(){
+       return (
+           instence.delete(`auth/login`)
+       )
     }
 };
