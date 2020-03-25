@@ -4,17 +4,18 @@ import {profileThunk, statusThunk, updateStatusThunk} from "../../redux/profile-
 import Profile from "./Profile";
 import withRouter from "react-router-dom/es/withRouter";
 import {compose} from "redux";
-import Redirect from "react-router-dom/es/Redirect";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
         if (!this.props.match.params.userId) {
             this.props.match.params.userId = this.props.myUserLoginId
+            if (!this.props.match.params.userId){
+                 this.props.history.push('/login')
+            }
         }
         this.props.profileThunk(this.props.match.params.userId);
         this.props.statusThunk(this.props.match.params.userId);
     }
-
     render() {
         return <Profile {...this.props}/>
     }

@@ -2,10 +2,10 @@ import React from "react";
 import aa from './ProfileInfo.module.css'
 import Loader from "../../Common/Loader";
 import ProfileStatus from "./ProfileStatus";
+import Redirect from "react-router-dom/es/Redirect";
 
 
 const ProfileInfo = (props) => {
-
     if(!props.store.profileId){
         return <Loader/>;
     }
