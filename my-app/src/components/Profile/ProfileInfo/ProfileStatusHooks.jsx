@@ -1,10 +1,15 @@
-import React, {useState} from "react";
-import aa from './ProfileInfo.module.css'
+import React, {useEffect, useState} from "react";
+import c from './ProfileInfo.module.css'
 
 const ProfileStatusHooks = (props) => {
 
+
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.state);
+
+   useEffect(() => {
+       setStatus(props.status)
+   },[props.status]);
 
     const activateEditMode = () => {
         setEditMode(!editMode);
@@ -16,7 +21,7 @@ const ProfileStatusHooks = (props) => {
     };
 
     return (
-        <div className={aa.statusContainerDiv}>
+        <div className={c.statusContainerDiv}>
             {!editMode &&
             <div>
                 <span onDoubleClick={activateEditMode}>{props.status || "------ No Status ------"}</span>

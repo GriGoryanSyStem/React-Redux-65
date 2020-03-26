@@ -1,7 +1,6 @@
 import React from "react";
 import aa from './ProfileInfo.module.css'
 import Loader from "../../Common/Loader";
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusHooks from "./ProfileStatusHooks";
 
 const ProfileInfo = (props) => {
@@ -19,7 +18,7 @@ const ProfileInfo = (props) => {
 
             <ProfileStatusHooks status = {props.store.status} updateStatusThunk = {props.updateStatusThunk}/>
 
-            <div className={aa.desctiptionBlock}>
+            <div className={aa.descriptionBlock}>
 
             </div>
         </div>
