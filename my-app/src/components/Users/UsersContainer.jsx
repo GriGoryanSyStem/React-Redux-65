@@ -3,7 +3,6 @@ import User from "./User";
 import Loader from "../Common/Loader";
 import {connect} from "react-redux";
 import {followThunk, getUsersThunkCreator, unFollowThunk,} from "../../redux/users-reducer";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
@@ -39,10 +38,8 @@ const mapStateToProps = (state) => {
 };
 
 export default compose(
-    withAuthRedirect,
     connect(mapStateToProps, {
         getUsersThunkCreator_S: getUsersThunkCreator,
         followThunkCreator_S: followThunk,
         unFollowThunkCreator_S: unFollowThunk
-    })
-)(UsersContainer);
+    }))(UsersContainer);
