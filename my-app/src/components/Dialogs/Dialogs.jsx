@@ -5,7 +5,8 @@ import Massages from "./Massage/Massages";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, minLength, required} from "../../utilValidation/validators/validator";
 import {renderField} from "../Common/FormsControl/FormsControl";
-import Redirect from "react-router-dom/es/Redirect";
+import {Redirect} from "react-router-dom";
+
 
 
 const Dialogs = (props) => {

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'; //  NavLink to = {"/something name"}
 //activeClassName  20. Уроки
 import React from "react";
 import css from './NavBar.module.css'; // Урок 14. // don't use << _ >> && << - >> in css style. f.ex. _header or my-header;
-console.log(css); // 14
+
 
 const NavBar = () => {
     return (

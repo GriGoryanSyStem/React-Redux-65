@@ -38,7 +38,7 @@ export const followThunk = (userId) => {
     return (dispatch) => {
         dispatch(followButtonDisableAC(true, userId));
         UsersAPI.followApi(userId).then(response => {
-            if (response.data.resultCode == 0) {
+            if (response.data.resultCode === 0) {
                 dispatch(unFollowAC(userId));
             }
             dispatch(followButtonDisableAC(false, userId));
@@ -49,7 +49,7 @@ export const unFollowThunk = (userId) => {
     return (dispatch) => {
         dispatch(followButtonDisableAC(true, userId));
         UsersAPI.unFollowApi(userId).then(response => {
-            if (response.data.resultCode == 0) {
+            if (response.data.resultCode === 0) {
                 dispatch(followAC(userId));
             }
             dispatch(followButtonDisableAC(false, userId));

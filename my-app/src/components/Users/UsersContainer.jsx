@@ -7,9 +7,6 @@ import {compose} from "redux";
 
 
 class UsersContainer extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.getUsersThunkCreator_S(this.props.currentPage, this.props.pageSize); //66

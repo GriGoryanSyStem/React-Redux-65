@@ -12,7 +12,7 @@ const ProfileInfo = (props) => {
             <div className={aa.flowerGirl}>
                 <img
                     src={props.store.profileId.photos.large}
-                    alt="my profile image"/>
+                    alt="my profile MyImage"/>
             </div>
             <div>{props.store.profileId.fullName}</div>
 

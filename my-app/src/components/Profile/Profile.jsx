@@ -1,8 +1,8 @@
-import React from "react";
-import MyPosts from "./MyPosts/MyPosts"; // Урок 14. // don't use << _ >> && << - >> in css style. f.ex. _header or my-header;
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+// don't use << _ >> && << - >> in css style. f.ex. _header or my-header;
+
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import Redirect from "react-router-dom/es/Redirect";
+import React from "react";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = (props) => {
 

@@ -2,20 +2,27 @@ import React from "react";
 import dd from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
-import {required, maxLength, minLength} from "../../../utilValidation/validators/validator";
+import {maxLength, minLength, required} from "../../../utilValidation/validators/validator";
 import {renderField} from "../../Common/FormsControl/FormsControl";
+
+// import React, {PureComponent}from "react";
+// const MyPosts extends React.PureComponent {}
+// shouldComponentUpdate(nextProps, nextState, nextContext) {
+//     return nextProps != this.props || nextState != this.state;
+// } // 87 - shouldComponentUpdate, PureComponent, memo
 
 let maxLength15 = maxLength(15);
 let minLength2 = minLength(2);
 
 const MyPosts = (props) => {
-    let newArrPostsData = props.store.profilePage.postsData.map((index, key) => {
+    let newArrPostsData = props.postsData.map((index, key) => {
         return (
             <Post key={key} id={index.id} nameGr={index.massage} likesCount={index.likesCount} faceSrc={index.faceSrc}/>
         )
     });
+
     let addPost = (value) => {
-        props.addPostProp(value.TextValue);
+        props.addPostActionCreator(value.TextValue);
     };
     return (
         <div className={dd.postsBlock}>
@@ -42,6 +49,7 @@ const addNewPostForm = (props) => {
         </form>
     )
 };
+
 
 const AddPostFormRedux = reduxForm({form: 'addMassageForm'})(addNewPostForm);
 export default MyPosts;

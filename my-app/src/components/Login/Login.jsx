@@ -2,10 +2,10 @@ import React from 'react';
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {loginThunk} from "../../redux/auth-reducer";
-import Redirect from "react-router-dom/es/Redirect";
 import {email, maxLength, minLength, required} from "../../utilValidation/validators/validator";
 import {renderField} from "../Common/FormsControl/FormsControl";
 import c from '../Common/FormsControl/FormsControl.module.css'
+import {Redirect} from "react-router-dom";
 
 
 let maxLength30 = maxLength(30);

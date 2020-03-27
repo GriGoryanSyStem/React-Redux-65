@@ -1,6 +1,6 @@
 import React from "react";          // exact path 22. Урок
 import "./App.css";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";//Route  19. Уроки // need to install    npm i react-route-dom -save
+import {Route, withRouter} from "react-router-dom";//Route  19. Уроки // need to install    npm i react-route-dom -save
 import NavBar from "./components/NavBar/NavBar";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";

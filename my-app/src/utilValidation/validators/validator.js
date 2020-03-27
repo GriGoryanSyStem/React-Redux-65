@@ -1,5 +1,3 @@
-import React from "react";
-
 //https://redux-form.com/8.3.0/examples/fieldlevelvalidation/
 
 export const required = (value) => {

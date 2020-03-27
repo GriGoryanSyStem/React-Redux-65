@@ -2,8 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import {profileThunk, statusThunk, updateStatusThunk} from "../../redux/profile-reducer";
 import Profile from "./Profile";
-import withRouter from "react-router-dom/es/withRouter";
 import {compose} from "redux";
+import {withRouter} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {

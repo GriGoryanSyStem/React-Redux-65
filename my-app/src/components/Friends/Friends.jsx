@@ -12,7 +12,7 @@ const Friends = (props) => {
     });
 
  let addFriend = () => {
-     console.log(`${CreateFriendsArr}` + ' CreateFriendsArr')
+     console.log(`${CreateFriendsArr} CreateFriendsArr` )
  };
 
     return (

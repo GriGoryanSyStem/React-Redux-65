@@ -28,7 +28,7 @@ export const UsersAPI = {
         )
     },
     getProfileApi(userId){
-        console.warn('poxeq ProfileApi object in api.js')
+        // console.warn('poxeq ProfileApi object in api.js');
         return (
             ProfileAPI.getProfileApi(userId)
         )
