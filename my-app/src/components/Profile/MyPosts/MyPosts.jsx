@@ -14,8 +14,8 @@ import {renderField} from "../../Common/FormsControl/FormsControl";
 let maxLength15 = maxLength(15);
 let minLength2 = minLength(2);
 
-const MyPosts = (props) => {
-    let newArrPostsData = props.postsData.map((index, key) => {
+let MyPosts = (props) => {
+    let newArrPostsData = [...props.postsData].reverse().map((index, key) => {
         return (
             <Post key={key} id={index.id} nameGr={index.massage} likesCount={index.likesCount} faceSrc={index.faceSrc}/>
         )
