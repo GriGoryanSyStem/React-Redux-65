@@ -1,48 +1,40 @@
-import React from "react";
-import Us_css from "./Users.module.css";
+import React, {useState} from "react";
+import c from "./Users.module.css";
 import {NavLink} from "react-router-dom";
 import followPict from "../../Pictures/unfollow.png";
 
+import Pagination from "./Pagination";
+
 
 let User = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
     return (
-        <div>
-            <div className={Us_css.pagesNumberDiv}>
-                {pages.map((p, i) => {
-                    return (
-                        <div key={i} className={props.currentPage === p ? Us_css.selectedPage : ''}
-                             onClick={() => {
-                                 props.onPageChangeFunc(p)
-                             }}>{`${p} `}</div>) // onClick={ () => {} }
-                })}
-            </div>
-            <div className={Us_css.usersNumberDiv}>
+        <main>
+             <Pagination onPageChangeFunc = {props.onPageChangeFunc}
+                         currentPage ={props.currentPage}
+                         totalUsersCount ={props.totalUsersCount}
+                         pageSize ={props.pageSize}/>
+
+            <div className={c.usersNumberDiv}>
                 {
-                    props.users.map((u, i) => <div key={i} className={Us_css.itemNumberDiv}>
+                    props.users.map((u, i) => <div key={i} className={c.itemNumberDiv}>
+
+                        <div className={c.images}>
+                            <NavLink to={`/profile/${u.id}`}>
+                                <img
+                                    src={u.photos.small != null ? u.photos.small : followPict}
+                                    alt="alt"/>
+                            </NavLink>
+                        </div>
                         <div>
-                            <div className={Us_css.images}>
-                                <NavLink to={`/profile/${u.id}`}>
-                                    <img
-                                        src={u.photos.small != null ? u.photos.small : followPict}
-                                        alt="alt"/>
-                                </NavLink>
-                            </div>
-                            <div>
-                                {u.followed
-                                    ? <button disabled={props.folElemArr.some(elemId => elemId === u.id)}
-                                              onClick={() => {
-                                                  props.unFollowThunkCreator_S(u.id);
-                                              }}> Unfollow</button>
-                                    : <button disabled={props.folElemArr.some(elemId => elemId === u.id)}
-                                              onClick={() => {
-                                                  props.followThunkCreator_S(u.id);
-                                              }}>Follow</button>}
-                            </div>
+                            {u.followed
+                                ? <button disabled={props.folElemArr.some(elemId => elemId === u.id)}
+                                          onClick={() => {
+                                              props.unFollowThunkCreator_S(u.id);
+                                          }}> Unfollow</button>
+                                : <button disabled={props.folElemArr.some(elemId => elemId === u.id)}
+                                          onClick={() => {
+                                              props.followThunkCreator_S(u.id);
+                                          }}>Follow</button>}
                         </div>
                         <div>
                             <div>
@@ -57,7 +49,7 @@ let User = (props) => {
                     </div>)
                 }
             </div>
-        </div>
+        </main>
     )
 };
 export default User;
