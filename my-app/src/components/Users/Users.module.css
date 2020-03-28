@@ -36,14 +36,32 @@
     overflow: hidden;
 }
 .paginator {
+    display: flex;
+    justify-content: center;
     margin: 10px;
 }
 .pageNumber {
+    width: 10%;
+    cursor: pointer;
+    text-align: center;
     padding: 2px;
     border: 1px solid grey;
 }
 
 .pageNumber.selectedPage {
     font-weight: bold;
-    border-color: black;
+    border: 1px solid black;
+}
+.nextButton{
+    margin-left: 2px;
+    width: 50px;
+}
+.prevButton{
+    margin-right: 2px;
+    width: 50px;
+}
+.containerSelected{
+    width: 300px;
+    display: flex;
+    justify-content: left;
 }

@@ -23,7 +23,6 @@ let initialState = {
     ],
     profileId: null,
     status: "",
-
 };
 
 
@@ -32,7 +31,7 @@ export const profileThunk = (userId) => async (dispatch) => {
     dispatch(setApiDataAC(response.data));
 };
 export const statusThunk = (userId) => async (dispatch) => {
-    let response = ProfileAPI.getStatusApi(userId);
+    let response = await ProfileAPI.getStatusApi(userId);
     dispatch(setStatusAC(response.data));
 };
 export const updateStatusThunk = (status) => {
