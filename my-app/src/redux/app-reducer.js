@@ -1,4 +1,4 @@
-import {authThunk} from "./auth-reducer";
+import {getAuthThunk} from "./auth-reducer";
 
 let initialState = {
     initialized: false,
@@ -20,7 +20,7 @@ export const initializedSuccess = () => (
 
 export const initializedAppThunk = () => {
     return (dispatch) => {
-        let promise = dispatch(authThunk());
+        let promise = dispatch(getAuthThunk());
         Promise.all([promise]).then(()=>{
             dispatch(initializedSuccess());
         });

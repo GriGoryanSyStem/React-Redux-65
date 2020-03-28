@@ -11,13 +11,13 @@ import { reducer as formReducer } from 'redux-form'
 import appReducer from "./app-reducer";
 
 let reducers = combineReducers({
-    profilePage: profileReducer,
-    dialogsPage: dialogsReducer,
-    usersPage:usersReducer,
-    sidebarPage : sidebarReducer,
-    myAllFriends : friendsReducer,
-    auth : authReducer,
-    app: appReducer,
+    profilePageReducer: profileReducer,
+    dialogsPageReducer: dialogsReducer,
+    usersPageReducer:usersReducer,
+    sidebarPageReducer : sidebarReducer,
+    myFriendsPageReducer : friendsReducer,
+    authReducer : authReducer,
+    appReducer: appReducer,
     form: formReducer,
 });
 

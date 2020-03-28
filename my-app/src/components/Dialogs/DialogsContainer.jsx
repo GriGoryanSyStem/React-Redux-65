@@ -8,7 +8,7 @@ import {compose} from "redux";
 let mapStateToProps = (state) => {
     return {
         storeGetState:state,
-        isAuthLogin: state.auth.isAuth //68 Redirect
+        isAuthLogin: state.authReducer.isAuth //68 Redirect
     }
 };
 let mapDispatchToProps = (dispatch) => {

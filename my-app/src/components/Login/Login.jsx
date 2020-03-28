@@ -54,7 +54,7 @@ const LoginForm = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth  //68 Redirect
+        isAuth: state.authReducer.isAuth  //68 Redirect
     }
 };
 

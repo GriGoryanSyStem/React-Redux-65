@@ -8,9 +8,7 @@ let initialState = {
     currentPage: 1,
     isLoading: false,
     folElemArr: []
-};
-
-// console.log(initialState.users);
+};  // console.log(initialState.users);
 
 export const followAC = (userId) => ({type: 'FOLLOW', userId});
 export const unFollowAC = (userId) => ({type: 'UN_FOLLOW', userId});
@@ -20,43 +18,33 @@ export const setTotalAC = (TC) => ({type: 'TOTAL_USERS_COUNT', TC});
 export const toggleIsLoadingAC = (bool) => ({type: "TOGGLE_IS_LOADING", bool});
 export const followButtonDisableAC = (isFetching, userId) => ({type: "BUTTON_DISABLE", isFetching, userId});
 
-
 export const getUsersThunkCreator = (currentPage = 1, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsLoadingAC(true));
-        UsersAPI.getUsersApi(currentPage, pageSize).then(data => {   //52
+        UsersAPI.getUsersApi(currentPage, pageSize).then(response => {   //52
             dispatch(currentPageAC(currentPage));
             dispatch(toggleIsLoadingAC(false));
-            dispatch(setUsersAC(data.items));
-            dispatch(setTotalAC(data.totalCount));
+            dispatch(setUsersAC(response.data.items));
+            dispatch(setTotalAC(response.data.totalCount));
         });
     }
 };
-
-
-export const followThunk = (userId) => {
-    return (dispatch) => {
+export const followThunk = (userId) => async (dispatch) => {
         dispatch(followButtonDisableAC(true, userId));
-        UsersAPI.followApi(userId).then(response => {
+       let response = await UsersAPI.followApi(userId);
             if (response.data.resultCode === 0) {
                 dispatch(unFollowAC(userId));
             }
             dispatch(followButtonDisableAC(false, userId));
-        });
-    }
 };
-export const unFollowThunk = (userId) => {
-    return (dispatch) => {
+export const unFollowThunk = (userId) => async (dispatch) => {
         dispatch(followButtonDisableAC(true, userId));
-        UsersAPI.unFollowApi(userId).then(response => {
+        let response = await UsersAPI.unFollowApi(userId);
             if (response.data.resultCode === 0) {
                 dispatch(followAC(userId));
             }
             dispatch(followButtonDisableAC(false, userId));
-        });
-    }
 };
-
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {

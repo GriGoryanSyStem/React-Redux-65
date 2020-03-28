@@ -4,8 +4,9 @@ import Friend from "./Friend/Friend";
 
 
 const Friends = (props) => {
+    debugger
     console.log(props);
-    let CreateFriendsArr = props.storeGetStateProps.myAllFriends.countFriends.map((index, key) => {
+    let CreateFriendsArr = props.storeGetStateProps.myFriendsPageReducer.countFriends.map((index, key) => {
         return (
             <Friend key={key} id={index.id} name={index.name} newSrc={index.crImageSrc}/>
         )

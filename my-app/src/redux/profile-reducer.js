@@ -22,23 +22,18 @@ let initialState = {
         }
     ],
     profileId: null,
-    status: ""
+    status: "",
+
 };
 
 
-export const profileThunk = (userId) => {
-    return (dispatch) => {
-        UsersAPI.getProfileApi(userId).then(response => {
-            dispatch(setApiDataAC(response.data));
-        });
-    }
+export const profileThunk = (userId) => async (dispatch) => {
+    let response = await UsersAPI.getProfileApi(userId);
+    dispatch(setApiDataAC(response.data));
 };
-export const statusThunk = (userId) => {
-    return (dispatch) => {
-        ProfileAPI.getStatusApi(userId).then(response => {
-            dispatch(setStatusAC(response.data));
-        });
-    }
+export const statusThunk = (userId) => async (dispatch) => {
+    let response = ProfileAPI.getStatusApi(userId);
+    dispatch(setStatusAC(response.data));
 };
 export const updateStatusThunk = (status) => {
     return (dispatch) => {
@@ -52,33 +47,33 @@ export const updateStatusThunk = (status) => {
 
 
 const profileReducer = (state = initialState, action) => {
-    if (action.type === 'ADD-POST') {
-        let newPost = {
-            id: 5,
-            massage: action.value,
-            likesCount: 2020,
-            faceSrc: 'https://c.stocksy.com/a/LXL500/z9/1274431.jpg?1578827516'
-        };
-        let Copy = {...state};
-        Copy.postsData = [...state.postsData];
-        Copy.postsData.push(newPost);
-        return Copy;
+    switch (action.type) {
+        case 'ADD-POST':
+            let newPost = {
+                id: 5,
+                massage: action.value,
+                likesCount: 2020,
+                faceSrc: 'https://c.stocksy.com/a/LXL500/z9/1274431.jpg?1578827516'
+            };
+            let Copy = {...state};
+            Copy.postsData = [...state.postsData];
+            Copy.postsData.push(newPost);
 
-    } else if (action.type === 'SET-API-DATA') {
-        return {
-            ...state,
-            profileId: action.profileId,
-        }
-    } else if (action.type === 'SET-STATUS') {
-        return {
-            ...state,
-            status: action.status,
-        }
-    } else {
-        return state;
+            return Copy;
+        case 'SET-API-DATA':
+            return {
+                ...state,
+                profileId: action.profileId,
+            };
+        case 'SET-STATUS':
+            return {
+                ...state,
+                status: action.status,
+            };
+        default:
+            return state;
     }
 };
-
 
 export const addPostActionCreator = (value) => {  //39 - Уроки
     return {type: 'ADD-POST', value}
@@ -89,6 +84,5 @@ export const setApiDataAC = (profileId) => {
 export const setStatusAC = (status) => {
     return {type: 'SET-STATUS', status}
 };
-
 
 export default profileReducer;  //41 - React

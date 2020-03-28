@@ -5,7 +5,7 @@ import followPict from "../../Pictures/unfollow.png";
 
 
 let User = (props) => {
-    let pagesCount = Math.ceil(props.store.totalUsersCount / props.store.pageSize);
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
@@ -15,7 +15,7 @@ let User = (props) => {
             <div className={Us_css.pagesNumberDiv}>
                 {pages.map((p, i) => {
                     return (
-                        <div key={i} className={props.store.currentPage === p ? Us_css.selectedPage : ''}
+                        <div key={i} className={props.currentPage === p ? Us_css.selectedPage : ''}
                              onClick={() => {
                                  props.onPageChangeFunc(p)
                              }}>{`${p} `}</div>) // onClick={ () => {} }
@@ -23,7 +23,7 @@ let User = (props) => {
             </div>
             <div className={Us_css.usersNumberDiv}>
                 {
-                    props.store.users.map((u, i) => <div key={i} className={Us_css.itemNumberDiv}>
+                    props.users.map((u, i) => <div key={i} className={Us_css.itemNumberDiv}>
                         <div>
                             <div className={Us_css.images}>
                                 <NavLink to={`/profile/${u.id}`}>
@@ -34,11 +34,11 @@ let User = (props) => {
                             </div>
                             <div>
                                 {u.followed
-                                    ? <button disabled={props.store.folElemArr.some(elemId => elemId === u.id)}
+                                    ? <button disabled={props.folElemArr.some(elemId => elemId === u.id)}
                                               onClick={() => {
                                                   props.unFollowThunkCreator_S(u.id);
                                               }}> Unfollow</button>
-                                    : <button disabled={props.store.folElemArr.some(elemId => elemId === u.id)}
+                                    : <button disabled={props.folElemArr.some(elemId => elemId === u.id)}
                                               onClick={() => {
                                                   props.followThunkCreator_S(u.id);
                                               }}>Follow</button>}

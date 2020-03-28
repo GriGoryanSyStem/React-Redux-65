@@ -12,9 +12,7 @@ const instence = axios.create({
 export const UsersAPI = {
     getUsersApi(currentPage = 1, pageSize = 50) { //63 DAL, axios.create  default znachenie currentPage = 1, pageSize = 50
         return (
-            instence.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
-                return response.data  //promise
-            })
+            instence.get(`users?page=${currentPage}&count=${pageSize}`) //promise
         )
     },
     followApi(userId) {

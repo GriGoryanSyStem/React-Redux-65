@@ -1,4 +1,3 @@
-
 let initialState = {
     countFriends: [
         {
@@ -20,7 +19,7 @@ let initialState = {
 };
 
 const friendsReducer = (state = initialState, action) => {
-    if (action.type){
+    if (action.type) {
         return state;
     }
 };

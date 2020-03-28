@@ -48,7 +48,7 @@ const dialogsReducer = (state = initialState, action) => {
         stateCopy_2.messagesData.push({id: 4, massage: action.newMassageBody});
         return stateCopy_2;
     } else {
-        return state;
+        return state
     }
 };
 

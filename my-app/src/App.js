@@ -16,11 +16,9 @@ import {initializedAppThunk} from "./redux/app-reducer";
 import Loader from "./components/Common/Loader";
 
 class App extends React.Component {
-
     componentDidMount() {
         this.props.initializedAppThunk();
     }
-
     render() {
         if(!this.props.initialized){
             return <Loader/>;
@@ -45,7 +43,7 @@ class App extends React.Component {
     }
 }
 const mapStateToProps = (state) =>({
-    initialized:state.app.initialized
+    initialized:state.appReducer.initialized
 });
 
 export default compose(

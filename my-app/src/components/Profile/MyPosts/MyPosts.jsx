@@ -1,9 +1,10 @@
-import React from "react";
+import React from 'react';
 import dd from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, minLength, required} from "../../../utilValidation/validators/validator";
 import {renderField} from "../../Common/FormsControl/FormsControl";
+
 
 // import React, {PureComponent}from "react";
 // const MyPosts extends React.PureComponent {}
@@ -14,7 +15,8 @@ import {renderField} from "../../Common/FormsControl/FormsControl";
 let maxLength15 = maxLength(15);
 let minLength2 = minLength(2);
 
-let MyPosts = (props) => {
+let MyPosts = props => {
+
     let newArrPostsData = [...props.postsData].reverse().map((index, key) => {
         return (
             <Post key={key} id={index.id} nameGr={index.massage} likesCount={index.likesCount} faceSrc={index.faceSrc}/>
@@ -24,9 +26,10 @@ let MyPosts = (props) => {
     let addPost = (value) => {
         props.addPostActionCreator(value.TextValue);
     };
+
     return (
         <div className={dd.postsBlock}>
-            <AddPostFormRedux onSubmit={addPost}/>
+            <AddPostFormRedux onSubmit={addPost} />
             <div className={dd.posts}>
                 {newArrPostsData}
             </div>
@@ -34,22 +37,22 @@ let MyPosts = (props) => {
     )
 };
 
-const addNewPostForm = (props) => {
+let addNewPostForm = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component={renderField}
-                       name="TextValue"
-                       label=' Write Post Massage'
-                       validate={[required, maxLength15, minLength2]}/>
-            </div>
-            <div>
-                <button>Add post</button>
-            </div>
-        </form>
+            <form onSubmit={props.handleSubmit} >
+                <div>
+                    <Field component={renderField}
+                           name="TextValue"
+                           label=' Write Post Massage'
+                           validate={[required, maxLength15, minLength2]}
+                    />
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
+            </form>
     )
 };
 
-
-const AddPostFormRedux = reduxForm({form: 'addMassageForm'})(addNewPostForm);
+const AddPostFormRedux = reduxForm({form: 'postMassageForm'})(addNewPostForm);
 export default MyPosts;
