@@ -5,17 +5,30 @@ import ProfileStatusHooks from "./ProfileStatusHooks";
 import userPhoto from "../../../Pictures/follow_woman.png"
 
 const ProfileInfo = (props) => {
+    let [editMode, setEditMode] = useState(false);
+
     if (!props.store.profileId) {
         return <Loader/>;
     }
+
+    const onMainPhotoSelected = (e) =>{
+        if (e.target.files.length){
+            props.savePhotoTK(e.target.files[0])
+        }
+    };
+
     return (
         <div>
             <div className={aa.flowerGirl}>
                 <img
                     src={props.store.profileId.photos.large || userPhoto}
                     alt="my profile MyImage"/>
-                {props.match.params.userId === props.myUserLoginId ? <input type={'file'}/> : null}
+                {props.match.params.userId === props.myUserLoginId ? <input type={'file'} onChange={onMainPhotoSelected}/> : null}
             </div>
+            {editMode
+                ?  <ProfileDataForm profileId={props.store.profileId}/>
+                : <ProfileDataInfo profileId={props.store.profileId}/>
+            }
             <ProfileStatusHooks status={props.store.status} updateStatusThunk={props.updateStatusThunk}/>
             <div className={aa.descriptionBlock}>
             </div>

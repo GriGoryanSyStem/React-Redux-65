@@ -48,6 +48,13 @@ export const ProfileAPI = {
         return (
             instence.put(`profile/status`,{status:status})
         )
+    },
+    savePhotoApi(file){
+        const formData = new FormData();
+        formData.append('image', file)
+        return (
+            instence.put(`profile/photo`, formData, {headers: { 'Content-type': 'multipart/form-data' }})
+        )
     }
 };
 

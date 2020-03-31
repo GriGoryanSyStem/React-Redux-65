@@ -34,6 +34,11 @@ export const statusThunk = (userId) => async (dispatch) => {
     let response = await ProfileAPI.getStatusApi(userId);
     dispatch(setStatusAC(response.data));
 };
+export const savePhotoTK = (file) => async (dispatch) => {
+    let response = await ProfileAPI.savePhotoApi(file);
+    debugger
+    dispatch(setPhotoAC(response.data.data.photos));
+};
 export const updateStatusThunk = (status) => {
     return (dispatch) => {
         ProfileAPI.UpdateStatusApi(status).then(response => {
@@ -69,6 +74,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 status: action.status,
             };
+        case 'SAVE-PHOTOS':
+            return {
+                ...state,
+                profileId: {...state.profileId, photos:action.photos},
+            };
         default:
             return state;
     }
@@ -82,6 +92,9 @@ export const setApiDataAC = (profileId) => {
 };
 export const setStatusAC = (status) => {
     return {type: 'SET-STATUS', status}
+};
+export const setPhotoAC = (photos) => {
+    return {type: 'SAVE-PHOTOS', photos}
 };
 
 export default profileReducer;  //41 - React
