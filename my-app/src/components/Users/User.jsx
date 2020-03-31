@@ -1,7 +1,7 @@
 import React from "react";
 import c from "./Users.module.css";
 import {NavLink} from "react-router-dom";
-import followPict from "../../Pictures/unfollow.png";
+import followPict from "../../Pictures/follow_woman.png";
 import Pagination from "./Pagination";
 import Loader from "../Common/Loader";
 

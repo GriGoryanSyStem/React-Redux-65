@@ -6,7 +6,8 @@ import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
-    componentDidMount() {
+
+    refreshPage(){
         if (!this.props.match.params.userId) {
             this.props.match.params.userId = this.props.myUserLoginId;
             if (!this.props.match.params.userId) {
@@ -15,6 +16,16 @@ class ProfileContainer extends React.Component {
         }
         this.props.profileThunk(this.props.match.params.userId);
         this.props.statusThunk(this.props.match.params.userId);
+    }
+
+    componentDidMount() {
+        this.refreshPage();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshPage();
+        }
     }
 
     render() {
