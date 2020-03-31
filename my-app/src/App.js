@@ -1,4 +1,4 @@
-import React from "react";          // exact path 22. Урок
+import React, {Suspense} from "react";          // exact path 22. Урок
 import "./App.css";
 import {Route, withRouter} from "react-router-dom";//Route  19. Уроки // need to install    npm i react-route-dom -save
 import NavBar from "./components/NavBar/NavBar";
@@ -6,7 +6,6 @@ import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import FriendsContainer from "./components/Friends/FriendsContainer";
-import UserContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -14,6 +13,9 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializedAppThunk} from "./redux/app-reducer";
 import Loader from "./components/Common/Loader";
+
+const UserContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+
 
 class App extends React.Component {
     componentDidMount() {
@@ -32,7 +34,10 @@ class App extends React.Component {
                     <Route path="/profile/:userId?" render={() =>
                         <ProfileContainer/>}/> {/* :userId? withRouter props.match.params //60     :userId?:param2:param3?   */}
                     <Route exact path="/dialogs" render={() => <DialogsContainer/>}/>
-                    <Route path={"/users"} render={() => <UserContainer/>}/>
+                    <Suspense fallback={<div>Loading...</div>}>
+                    <Route path={"/users"} render={() => {
+                        return (<UserContainer />)}}/>
+                    </Suspense>
                     <Route path="/news" component={News}/>
                     <Route path="/setting" component={Settings}/>
                     <Route path={"/friends"} render={() => <FriendsContainer/>}/>
