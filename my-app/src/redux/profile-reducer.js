@@ -21,7 +21,7 @@ let initialState = {
             faceSrc: 'https://img4.goodfon.ru/wallpaper/nbig/2/b9/deekshitha-bollywood-actress-celebrity-model-girl-beautiful.jpg'
         }
     ],
-    profileId: null,
+    profileInformation: null,
     status: "",
 };
 
@@ -36,8 +36,14 @@ export const statusThunk = (userId) => async (dispatch) => {
 };
 export const savePhotoTK = (file) => async (dispatch) => {
     let response = await ProfileAPI.savePhotoApi(file);
-    debugger
     dispatch(setPhotoAC(response.data.data.photos));
+};
+export const saveFormDataTK = (formData) => async (dispatch, getState) => {
+    const userId = getState().authReducer.id;
+    const response = await ProfileAPI.saveFormDataApi(formData);
+    if (response.data.resultCode === 0) {
+        dispatch(profileThunk(userId));
+    }
 };
 export const updateStatusThunk = (status) => {
     return (dispatch) => {
@@ -67,7 +73,7 @@ const profileReducer = (state = initialState, action) => {
         case 'SET-API-DATA':
             return {
                 ...state,
-                profileId: action.profileId,
+                profileInformation: action.profileInformation,
             };
         case 'SET-STATUS':
             return {
@@ -77,8 +83,13 @@ const profileReducer = (state = initialState, action) => {
         case 'SAVE-PHOTOS':
             return {
                 ...state,
-                profileId: {...state.profileId, photos:action.photos},
+                profileInformation: {...state.profileInformation, photos:action.photos},
             };
+            // case 'SET-FORM-DATA':
+            // return {
+            //     ...state,
+            //     // profileInformation: {...state.profileInformation, photos:action.photos},
+            // };
         default:
             return state;
     }
@@ -87,8 +98,8 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = (value) => {  //39 - Уроки
     return {type: 'ADD-POST', value}
 };
-export const setApiDataAC = (profileId) => {
-    return {type: 'SET-API-DATA', profileId}
+export const setApiDataAC = (profileInformation) => {
+    return {type: 'SET-API-DATA', profileInformation}
 };
 export const setStatusAC = (status) => {
     return {type: 'SET-STATUS', status}
@@ -96,5 +107,8 @@ export const setStatusAC = (status) => {
 export const setPhotoAC = (photos) => {
     return {type: 'SAVE-PHOTOS', photos}
 };
+// export const setFormDataAC = (formData) => {
+//     return {type: 'SET-FORM-DATA', formData}
+// };
 
 export default profileReducer;  //41 - React
