@@ -3,7 +3,7 @@ import React from "react";
 export const ProfileDataInfo = (props) => {
     let profileInformation = props.profileInformation;
     return (
-        <div>{props.isOwner && <button onClick={props.goToEditMode}>Edit</button>}
+        <div>{props.isOwner === props.profileInformation.userId && <button onClick={props.goToEditMode}>Edit</button>}
             <div><b>FullName:</b>{profileInformation.fullName}</div>
             <br/>
             <div>

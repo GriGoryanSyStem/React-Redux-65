@@ -43,6 +43,7 @@ export const saveFormDataTK = (formData) => async (dispatch, getState) => {
     const response = await ProfileAPI.saveFormDataApi(formData);
     if (response.data.resultCode === 0) {
         dispatch(profileThunk(userId));
+        debugger
     }
 };
 export const updateStatusThunk = (status) => {
