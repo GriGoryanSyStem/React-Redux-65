@@ -1,7 +1,6 @@
 import React from "react";
 
 export const ProfileDataInfo = (props) => {
-    debugger
     let profileInformation = props.profileInformation;
     return (
         <div>{props.isOwner && <button onClick={props.goToEditMode}>Edit</button>}

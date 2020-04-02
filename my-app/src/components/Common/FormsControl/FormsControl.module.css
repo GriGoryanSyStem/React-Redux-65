@@ -11,3 +11,7 @@
     padding: 5px;
 color: #ff0028;
 }
+.requiredError{
+    position: absolute;
+    margin-left: 10px;
+}

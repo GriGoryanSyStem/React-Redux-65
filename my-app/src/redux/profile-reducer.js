@@ -83,13 +83,11 @@ const profileReducer = (state = initialState, action) => {
         case 'SAVE-PHOTOS':
             return {
                 ...state,
-                profileInformation: {...state.profileInformation, photos:action.photos},
+                profileInformation: {...state.profileInformation, photos:action.photos, contacts() {
+
+                    }
+                },
             };
-            // case 'SET-FORM-DATA':
-            // return {
-            //     ...state,
-            //     // profileInformation: {...state.profileInformation, photos:action.photos},
-            // };
         default:
             return state;
     }
@@ -107,8 +105,5 @@ export const setStatusAC = (status) => {
 export const setPhotoAC = (photos) => {
     return {type: 'SAVE-PHOTOS', photos}
 };
-// export const setFormDataAC = (formData) => {
-//     return {type: 'SET-FORM-DATA', formData}
-// };
 
 export default profileReducer;  //41 - React

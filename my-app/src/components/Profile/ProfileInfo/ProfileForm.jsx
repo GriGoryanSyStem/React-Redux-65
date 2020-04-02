@@ -2,8 +2,10 @@ import {renderField} from "../../Common/FormsControl/FormsControl";
 import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, minLength, required} from "../../../utilValidation/validators/validator";
+import c from "./ProfileInfo.module.css"
 
 let maxLength30 = maxLength(30);
+let maxLength1000 = maxLength(1000);
 let minLength1 = minLength(1);
 
 const ProfileForm = (props) => {
@@ -37,9 +39,22 @@ const ProfileForm = (props) => {
                 <span><b>About me : </b></span>
                 <Field component={renderField}
                        type={'textarea'}
-                       name="AboutMe"
+                       name="aboutMe"
                        label='About me'
                        rows={'5'} cols={'20'}/>
+            </div>
+            <div>
+                <span><b>Contacts : </b></span>
+                {Object.keys(props.profileInformation.contacts).map((keyName, i) => (
+                    <div key = {i} className={c.contactItem}>
+                        <b>{keyName}</b>
+                        <Field component={renderField}
+                               type={'url'}
+                               name={`contacts.${keyName}`}
+                               label={`URL`}
+                               validate={[required, maxLength1000, minLength1]}
+                        /></div>
+                ))}
             </div>
         </form>
     )

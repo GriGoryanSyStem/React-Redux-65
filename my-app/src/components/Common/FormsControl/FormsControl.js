@@ -10,7 +10,7 @@ export const renderField = ({input, label, type, meta, rows, cols}) => {
             }
             {
             meta.touched
-                ? (meta.error && <span>{meta.error}</span>) || (meta.warning && <span>{meta.warning}</span>)
+                ? (meta.error && <span className={c.requiredError}>{meta.error}</span>) || (meta.warning && <span>{meta.warning}</span>)
                 : ''
             }
         </div>

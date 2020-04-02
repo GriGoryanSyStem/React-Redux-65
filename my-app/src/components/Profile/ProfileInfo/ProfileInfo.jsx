@@ -31,7 +31,7 @@ const ProfileInfo = (props) => {
                     <input type={'file'} onChange={onMainPhotoSelected}/> : null}
             </div>
             {editMode
-                ? <ProfileFormReduxForm initialValues = {props.store.profileInformation} onSubmit={onSaveSubmit}/>
+                ? <ProfileFormReduxForm profileInformation ={props.store.profileInformation}  initialValues = {props.store.profileInformation} onSubmit={onSaveSubmit}/>
                 : <ProfileDataInfo profileInformation={props.store.profileInformation}
                                    isOwner={props.match.params.userId}
                                    goToEditMode={() => {setEditMode(true)}}
