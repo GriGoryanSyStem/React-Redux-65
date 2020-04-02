@@ -17,7 +17,7 @@ const ProfileInfo = (props) => {
         }
     };
     let onSaveSubmit = (formData) => {
-        // console.log(formData);
+        // console.log(formData); 
         props.saveFormDataTK(formData); //  formData = object
         setEditMode(false)
     };
